@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Árvore Genealógica Ítalo-Brasileira — Gaggiato / Martini</title>
+  <meta name="description" content="Página para visualizar a árvore genealógica e documentos da origem italiana (PDF embutido, resumo e links)." />
+  <style>
+    :root{
+      --bg:#0b1020; --panel:rgba(255,255,255,.06);
+      --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.70);
+      --line:rgba(255,255,255,.12);
+      --accent:#7dd3fc; --accent2:#a78bfa;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px; --max:1100px;
+      --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    [data-theme="light"]{
+      --bg:#f7f7fb; --panel:rgba(0,0,0,.05);
+      --text:rgba(0,0,0,.88); --muted:rgba(0,0,0,.65);
+      --line:rgba(0,0,0,.12);
+      --shadow:0 10px 30px rgba(0,0,0,.10);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--font); color:var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(167,139,250,.25), transparent 55%),
+        radial-gradient(900px 500px at 90% 20%, rgba(125,211,252,.18), transparent 55%),
+        var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 48px)); margin:0 auto;}
+    .header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid var(--line);
+      background: rgba(10,15,30,.55);
+    }
+    [data-theme="light"] .header{ background: rgba(247,247,251,.75); }
+    .header__inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:14px;
+    }
+    .brand{font-weight:800; letter-spacing:.2px}
+    .nav{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+    .nav a{color:var(--muted)}
+    .nav a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.20));
+      box-shadow:var(--shadow); font-weight:650;
+    }
+    .btn--ghost{background:transparent; box-shadow:none; padding:8px 12px}
+    .hero{padding:56px 0 18px}
+    .hero__grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; align-items:start}
+    h1{font-size:clamp(26px, 4vw, 40px); line-height:1.05; margin:0 0 10px}
+    .sub{color:var(--muted); line-height:1.55; margin:0 0 14px}
+    .chips{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{
+      font-size:13px; color:var(--muted);
+      padding:6px 10px; border:1px solid var(--line);
+      border-radius:999px; background:var(--panel);
+    }
+    .card{
+      background:var(--panel); border:1px solid var(--line);
+      border-radius:var(--radius); padding:16px;
+      box-shadow:var(--shadow);
+    }
+    .section{padding:34px 0}
+    .section__head h2{margin:0; font-size:22px}
+    .section__head p{margin:6px 0 0; color:var(--muted)}
+    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .grid--2{grid-template-columns: 1fr 1fr}
+    .muted{color:var(--muted)}
+    .kicker{color:var(--muted); margin:0 0 8px}
+    details{
+      border:1px solid var(--line); border-radius:14px;
+      padding:12px 12px; background: rgba(255,255,255,.03);
+    }
+    [data-theme="light"] details{ background: rgba(0,0,0,.03); }
+    summary{cursor:pointer; font-weight:700}
+    .list{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.55}
+    .pdfwrap{
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(0,0,0,.2);
+    }
+    .pdfbar{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      padding:10px 12px; border-bottom:1px solid var(--line);
+      background: rgba(0,0,0,.15);
+    }
+    [data-theme="light"] .pdfbar{ background: rgba(0,0,0,.04); }
+    .pdfbar .left{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .pill{
+      font-size:12px; color:var(--muted);
+      border:1px solid var(--line);
+      border-radius:999px; padding:5px 10px;
+      background: var(--panel);
+    }
+    iframe, object{display:block; width:100%; height:78vh; border:0}
+    .footer{
+      padding:26px 0 34px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+    }
+    .footer__inner{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    @media (max-width: 980px){
+      .hero__grid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      .grid--2{grid-template-columns: 1fr}
+      iframe, object{height:70vh}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <div class="brand">Árvore Genealógica Ítalo-Brasileira</div>
+      <nav class="nav">
+        <a href="#pdf">PDF</a>
+        <a href="#resumo">Resumo</a>
+        <a href="#fontes">Fontes</a>
+        <button class="btn btn--ghost" id="themeToggle" aria-label="Alternar tema">Tema</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="kicker">Origem italiana • Linha Gaggiato / Favareto e Martini / Barberato</p>
+          <h1>Documentos e árvore genealógica (com PDF embutido)</h1>
+          <p class="sub">
+            Esta página organiza e exibe o PDF “Arvore Genealogica.pdf” e um resumo navegável
+            com nomes, datas, locais e registros principais.
+          </p>
+          <div class="chips">
+            <span class="chip">Venezia (Favaro / Campalto)</span>
+            <span class="chip">Sicília (Ribera, Agrigento)</span>
+            <span class="chip">Brasil (Mococa / SP)</span>
+            <span class="chip">Imigração (1889 / 1892)</span>
+          </div>
+        </div>
+
+        <aside class="card">
+          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+            <div>
+              <div class="muted" style="font-size:12px;">Arquivo principal</div>
+              <div style="font-weight:750; margin-top:4px;">Arvore Genealogica.pdf</div>
+            </div>
+            <span class="pill" id="statusPill">verificando…</span>
+          </div>
+          <p class="muted" style="margin:12px 0 0; line-height:1.55;">
+            Se o PDF não abrir, confirme que o arquivo está na raiz do repositório com o nome
+            exatamente igual (incluindo espaço e maiúsculas/minúsculas).
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="#pdf">Abrir PDF</a>
+            <a class="btn btn--ghost" id="downloadLink" href="Arvore%20Genealogica.pdf" download>Baixar</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="pdf">
+      <div class="container">
+        <div class="section__head">
+          <h2>PDF (visualização)</h2>
+          <p>O PDF aparece embutido abaixo. Você pode também baixar no botão “Baixar”.</p>
+        </div>
+
+        <div class="pdfwrap" style="margin-top:12px;">
+          <div class="pdfbar">
+            <div class="left">
+              <span class="pill">Dica: use Ctrl+F no visualizador</span>
+              <span class="pill">Se falhar, use “Baixar”</span>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn btn--ghost" href="Arvore%20Genealogica.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
+              <a class="btn" href="Arvore%20Genealogica.pdf" download>Baixar PDF</a>
+            </div>
+          </div>
+
+          <!-- 1) object (boa compatibilidade) -->
+          <object data="Arvore%20Genealogica.pdf" type="application/pdf">
+            <!-- 2) fallback: iframe -->
+            <iframe src="Arvore%20Genealogica.pdf" title="Árvore Genealógica (PDF)"></iframe>
+          </object>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="resumo">
+      <div class="container">
+        <div class="section__head">
+          <h2>Resumo estruturado (navegável)</h2>
+          <p>Resumo com base no seu PDF: nomes, datas, lugares e registros-chave.</p>
+        </div>
+
+        <div class="grid grid--2" style="margin-top:12px;">
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Núcleo Gaggiato / Favareto</h3>
+
+            <details open>
+              <summary>Marco Gaggiato (“Antenato”)</summary>
+              <ul class="list">
+                <li>Nascimento: ~1865 (documento indica 27/08/1865).</li>
+                <li>Pais: Pasquale Gaggiato e Angela Favareto.</li>
+                <li>Imigração ao Brasil: registro de chegada do núcleo familiar em 19/01/1889 (Museu da Imigração).</li>
+                <li>Local associado: Favaro, Venezia (menções no material).</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Pasquale Gaggiato & Angela Favareto</summary>
+              <ul class="list">
+                <li>Italianos; núcleo familiar com filhos (menção: Vittorio, Marco, Roma).</li>
+                <li>Referências a Ribera, Agrigento (Sicília) e Favaro, Venezia (no material).</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Irmãos: Vittorio e Roma</summary>
+              <ul class="list">
+                <li>Vittorio: registro de chegada em 05/07/1892; há certidão de batismo (Venezia/Campalto) no PDF.</li>
+                <li>Roma: aparece no registro de chegada de 19/01/1889 (família) e em imagem de óbito no PDF.</li>
+              </ul>
+            </details>
+
+            <p class="muted" style="margin:12px 0 0;">
+              Observação: os dados acima são um “resumo de navegação”; o detalhamento completo está no PDF.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 style="margin:0 0 10px;">Núcleo Martini / Barberato</h3>
+
+            <details open>
+              <summary>Domenico Martini & Stella Barberato</summary>
+              <ul class="list">
+                <li>Referência a Treviso (Vêneto) no material.</li>
+                <li>Menções: “Bisa Itália”, “Vó Odete”, “Fazenda Limoeiro”, São José do Rio Pardo (SP).</li>
+                <li>Casamento no Brasil: Mococa, SP — 1898 (conforme anotação no PDF).</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Odete e descendência</summary>
+              <ul class="list">
+                <li>Odete: 1911 — São José do Rio Pardo, SP (Fazenda Limoeiro).</li>
+                <li>Descendentes listados: Walter (pai), Walter (eu), Flávio (irmão), Fábio (irmão).</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Locais e referências</summary>
+              <ul class="list">
+                <li>Parrocchia / Campalto (Venezia): link aparece no PDF.</li>
+                <li>Mapa de distribuição do sobrenome “Gaggiato”: referência aparece no PDF.</li>
+              </ul>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="fontes">
+      <div class="container">
+        <div class="section__head">
+          <h2>Links e fontes (do seu material)</h2>
+          <p>Atalhos úteis que aparecem no PDF para consulta externa.</p>
+        </div>
+
+        <div class="grid" style="margin-top:12px;">
+          <a class="card" href="https://www.parrocchiacampalto.it/" target="_blank" rel="noopener">
+            <div class="muted" style="font-size:12px;">Paróquia (batismo / registros)</div>
+            <div style="font-weight:750; margin-top:6px;">parrocchiacampalto.it</div>
+          </a>
+
+          <a class="card" href="http://www.gens.info/italia/it/turismo-viaggi-e-tradizioni-italia?cognome=gaggiato&x=28&y=16" target="_blank" rel="noopener">
+            <div class="muted" style="font-size:12px;">Mapa / distribuição do sobrenome</div>
+            <div style="font-weight:750; margin-top:6px;">gens.info — “Gaggiato”</div>
+          </a>
+
+          <a class="card" href="#pdf">
+            <div class="muted" style="font-size:12px;">Documento base</div>
+            <div style="font-weight:750; margin-top:6px;">Arvore Genealogica.pdf</div>
+          </a>
+        </div>
+
+        <p class="muted" style="margin:14px 0 0; line-height:1.55;">
+          Nota: os registros (imigração, óbitos, certidões e batismos) estão reproduzidos no PDF, incluindo imagens
+          de documentos e capturas de tela.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> — Árvore Genealógica</span>
+      <span class="muted">Hospedado no GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      const year = document.getElementById("year");
+      const statusPill = document.getElementById("statusPill");
+
+      year.textContent = String(new Date().getFullYear());
+
+      const saved = localStorage.getItem("theme");
+      if(saved === "light") root.setAttribute("data-theme","light");
+
+      btn.addEventListener("click", () => {
+        const isLight = root.getAttribute("data-theme") === "light";
+        if(isLight){
+          root.removeAttribute("data-theme");
+          localStorage.setItem("theme","dark");
+        } else {
+          root.setAttribute("data-theme","light");
+          localStorage.setItem("theme","light");
+        }
+      });
+
+      // Verifica se o PDF existe (para orientar o usuário)
+      fetch("Arvore%20Genealogica.pdf", { method: "HEAD" })
+        .then(r => {
+          if(r.ok){
+            statusPill.textContent = "PDF encontrado";
+          } else {
+            statusPill.textContent = "PDF não encontrado";
+          }
+        })
+        .catch(() => statusPill.textContent = "PDF não encontrado");
+    })();
+  </script>
+</body>
+</html>
