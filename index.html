@@ -3,349 +3,1286 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Árvore Genealógica Ítalo-Brasileira — Família Gaggiato - Martini</title>
-  <meta name="description" content="Árvore genealógica da família Gaggiato e Martini." />
+  <title>Cidadania Italiana — Família Gaggiato · Martini</title>
+  <meta name="description" content="Árvore genealógica e documentação para cidadania italiana da família Gaggiato e Martini — origem veneziana e siciliana." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#0b1020; --panel:rgba(255,255,255,.06);
-      --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.70);
-      --line:rgba(255,255,255,.12);
-      --accent:#7dd3fc; --accent2:#a78bfa;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-      --radius:18px; --max:1100px;
-      --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    /* ─── TOKENS ─── */
+    :root {
+      --cream:     #f5f0e8;
+      --parchment: #ede6d6;
+      --warm:      #e8dcc8;
+      --ink:       #1a1209;
+      --ink-2:     #2d2010;
+      --ink-3:     #4a3820;
+      --brown:     #7a5c38;
+      --gold:      #b8872a;
+      --gold-2:    #d4a044;
+      --gold-3:    #edd88a;
+      --red-ita:   #ce2b37;
+      --green-ita: #009246;
+      --white-ita: #ffffff;
+      --muted:     #8a7560;
+      --border:    rgba(120, 90, 50, 0.18);
+      --border-2:  rgba(120, 90, 50, 0.30);
+      --shadow:    0 20px 60px rgba(26,18,9,0.14);
+      --shadow-sm: 0 4px 20px rgba(26,18,9,0.09);
+      --r:         16px;
+      --maxw:      1140px;
     }
-    [data-theme="light"]{
-      --bg:#f7f7fb; --panel:rgba(0,0,0,.05);
-      --text:rgba(0,0,0,.88); --muted:rgba(0,0,0,.65);
-      --line:rgba(0,0,0,.12);
-      --shadow:0 10px 30px rgba(0,0,0,.10);
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:var(--font); color:var(--text);
-      background:
-        radial-gradient(900px 500px at 10% 10%, rgba(167,139,250,.25), transparent 55%),
-        radial-gradient(900px 500px at 90% 20%, rgba(125,211,252,.18), transparent 55%),
-        var(--bg);
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 40px));
+      margin: 0 auto;
     }
-    a{color:inherit; text-decoration:none}
-    .container{width:min(var(--max), calc(100% - 48px)); margin:0 auto;}
-    .header{
-      position:sticky; top:0; z-index:10;
-      backdrop-filter: blur(14px);
-      border-bottom:1px solid var(--line);
-      background: rgba(10,15,30,.55);
+
+    /* ── Italian flag strip (top) ── */
+    .flag-strip {
+      height: 5px;
+      background: linear-gradient(90deg,
+        var(--green-ita) 0% 33.33%,
+        var(--white-ita) 33.33% 66.66%,
+        var(--red-ita)   66.66% 100%);
     }
-    [data-theme="light"] .header{ background: rgba(247,247,251,.75); }
-    .header__inner{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px;
+
+    /* ─── HEADER ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
-    .brand{font-weight:800; letter-spacing:.2px}
-    .nav{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
-    .nav a{color:var(--muted)}
-    .nav a:hover{color:var(--text)}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px; border-radius:999px;
-      border:1px solid var(--line);
-      background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.20));
-      box-shadow:var(--shadow); font-weight:650;
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 0;
     }
-    .btn--ghost{background:transparent; box-shadow:none; padding:8px 12px}
-    .hero{padding:56px 0 18px}
-    .hero__grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px; align-items:start}
-    h1{font-size:clamp(26px, 4vw, 40px); line-height:1.05; margin:0 0 10px}
-    .sub{color:var(--muted); line-height:1.55; margin:0 0 14px}
-    .chips{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{
-      font-size:13px; color:var(--muted);
-      padding:6px 10px; border:1px solid var(--line);
-      border-radius:999px; background:var(--panel);
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
-    .card{
-      background:var(--panel); border:1px solid var(--line);
-      border-radius:var(--radius); padding:16px;
-      box-shadow:var(--shadow);
+
+    .brand-flag {
+      display: flex;
+      height: 28px;
+      width: 42px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      flex-shrink: 0;
     }
-    .section{padding:34px 0}
-    .section__head h2{margin:0; font-size:22px}
-    .section__head p{margin:6px 0 0; color:var(--muted)}
-    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .grid--2{grid-template-columns: 1fr 1fr}
-    .muted{color:var(--muted)}
-    .kicker{color:var(--muted); margin:0 0 8px}
-    details{
-      border:1px solid var(--line); border-radius:14px;
-      padding:12px 12px; background: rgba(255,255,255,.03);
+
+    .brand-flag span { flex: 1; }
+    .brand-flag span:nth-child(1) { background: var(--green-ita); }
+    .brand-flag span:nth-child(2) { background: var(--white-ita); }
+    .brand-flag span:nth-child(3) { background: var(--red-ita); }
+
+    .brand-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: var(--ink-2);
+      line-height: 1.15;
     }
-    [data-theme="light"] details{ background: rgba(0,0,0,.03); }
-    summary{cursor:pointer; font-weight:700}
-    .list{margin:10px 0 0; padding-left:18px; color:var(--muted); line-height:1.55}
-    .pdfwrap{
-      border:1px solid var(--line);
-      border-radius:16px;
-      overflow:hidden;
-      background:rgba(0,0,0,.2);
+
+    .brand-text small {
+      display: block;
+      font-size: 0.72rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
-    .pdfbar{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-      padding:10px 12px; border-bottom:1px solid var(--line);
-      background: rgba(0,0,0,.15);
+
+    nav {
+      display: flex;
+      gap: 4px;
+      align-items: center;
     }
-    [data-theme="light"] .pdfbar{ background: rgba(0,0,0,.04); }
-    .pdfbar .left{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
-    .pill{
-      font-size:12px; color:var(--muted);
-      border:1px solid var(--line);
-      border-radius:999px; padding:5px 10px;
-      background: var(--panel);
+
+    nav a {
+      padding: 8px 13px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--ink-3);
+      font-weight: 500;
+      transition: background 0.18s, color 0.18s;
     }
-    iframe, object{display:block; width:100%; height:78vh; border:0}
-    .footer{
-      padding:26px 0 34px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
+
+    nav a:hover { background: var(--warm); color: var(--ink); }
+
+    .btn-nav {
+      padding: 9px 18px !important;
+      background: var(--ink) !important;
+      color: var(--cream) !important;
+      border-radius: 10px !important;
+      font-weight: 600 !important;
+      font-size: 0.84rem !important;
+      letter-spacing: 0.03em;
+      transition: background 0.2s !important;
     }
-    .footer__inner{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    @media (max-width: 980px){
-      .hero__grid{grid-template-columns: 1fr}
-      .grid{grid-template-columns: 1fr}
-      .grid--2{grid-template-columns: 1fr}
-      iframe, object{height:70vh}
+
+    .btn-nav:hover { background: var(--ink-2) !important; }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border-2);
+      background: var(--parchment);
+      color: var(--ink);
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      cursor: pointer;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 72px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '✦';
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      font-size: 320px;
+      color: rgba(184,135,42,0.05);
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 5vw, 4.8rem);
+      font-weight: 600;
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 52ch;
+      margin-bottom: 28px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      box-shadow: 0 4px 20px rgba(26,18,9,0.2);
+    }
+
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(26,18,9,0.3); }
+
+    .btn-secondary {
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      color: var(--ink-3);
+    }
+
+    .btn-secondary:hover { background: var(--warm); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(184,135,42,0.3);
+    }
+
+    .btn-gold:hover { box-shadow: 0 8px 32px rgba(184,135,42,0.45); }
+
+    /* Hero aside */
+    .hero-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--green-ita), var(--white-ita), var(--red-ita));
+    }
+
+    .card-label {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(184,135,42,0.12);
+      border: 1px solid rgba(184,135,42,0.3);
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .file-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--warm);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold-2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* Chips */
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .chip {
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      font-size: 0.82rem;
+      color: var(--brown);
+      font-weight: 500;
+    }
+
+    /* ─── SECTION ─── */
+    .section { padding: 64px 0; }
+
+    .section-head { margin-bottom: 36px; }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-kicker::before, .section-kicker::after {
+      content: '';
+      height: 1px;
+      width: 28px;
+      background: var(--gold-2);
+      opacity: 0.5;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider-ornament {
+      text-align: center;
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .divider-ornament::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider-ornament span {
+      position: relative;
+      background: var(--cream);
+      padding: 0 14px;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    /* ─── PDF ─── */
+    .pdf-wrap {
+      border: 1px solid var(--border-2);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--parchment);
+      box-shadow: var(--shadow);
+    }
+
+    .pdf-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--warm);
+    }
+
+    .pdf-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 0.76rem;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .pdf-bar-right { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    iframe, object { display: block; width: 100%; height: 78vh; border: 0; }
+
+    /* ─── RESUMO ─── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    .family-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .family-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .family-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, var(--warm), var(--parchment));
+      border: 1px solid var(--border-2);
+      flex-shrink: 0;
+    }
+
+    .family-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .family-card h3 small {
+      display: block;
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    /* Details/summary */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    details:last-of-type { margin-bottom: 0; }
+
+    summary {
+      cursor: pointer;
+      padding: 13px 16px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--ink-2);
+      background: var(--warm);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      transition: background 0.18s;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: '▸';
+      color: var(--gold);
+      font-size: 0.75rem;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::before { transform: rotate(90deg); }
+    details[open] summary { background: var(--parchment); }
+    summary:hover { background: var(--parchment); }
+
+    .details-body {
+      padding: 14px 16px;
+      background: var(--cream);
+    }
+
+    .details-body ul {
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .details-body li { margin-bottom: 5px; }
+    .details-body li:last-child { margin-bottom: 0; }
+    .details-body strong { color: var(--ink-3); }
+
+    .family-note {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(184,135,42,0.07);
+      border: 1px solid rgba(184,135,42,0.15);
+      line-height: 1.55;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 9px; top: 8px; bottom: 8px;
+      width: 1.5px;
+      background: linear-gradient(180deg, var(--gold-2), transparent);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .tl-item:last-child { margin-bottom: 0; }
+
+    .tl-dot {
+      position: absolute;
+      left: -27px; top: 5px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold-2);
+    }
+
+    .tl-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+
+    .tl-title {
+      font-weight: 600;
+      color: var(--ink-2);
+      font-size: 0.96rem;
+      margin-bottom: 3px;
+    }
+
+    .tl-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── ORIGENS ─── */
+    .origins-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .origin-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      border-radius: 16px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .origin-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+
+    .origin-card.veneto::before  { background: var(--gold); }
+    .origin-card.sicilia::before { background: var(--red-ita); }
+    .origin-card.brasil::before  { background: var(--green-ita); }
+
+    .origin-flag { font-size: 1.8rem; margin-bottom: 10px; }
+
+    .origin-card h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      margin-bottom: 6px;
+    }
+
+    .origin-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .origin-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .origin-tag {
+      font-size: 0.75rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--warm);
+      border: 1px solid var(--border);
+      color: var(--brown);
+      font-weight: 500;
+    }
+
+    /* ─── FONTES ─── */
+    .source-card {
+      background: var(--parchment);
+      border: 1px solid var(--border-2);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+
+    a.source-card:hover {
+      border-color: var(--gold);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .source-card .src-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .source-card .src-label {
+      font-size: 0.73rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .source-card .src-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 600; color: var(--ink-2); line-height: 1.2;
+    }
+    .source-card .src-desc {
+      font-size: 0.86rem; color: var(--muted); line-height: 1.55;
+    }
+    .src-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.82rem; color: var(--gold); font-weight: 600; margin-top: 4px;
+    }
+
+    /* ─── CTA ─── */
+    .cta-wrap {
+      background: var(--ink);
+      border-radius: 24px;
+      padding: 52px;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--green-ita), var(--white-ita), var(--red-ita));
+    }
+
+    .cta-wrap h2 { color: var(--cream); font-size: clamp(2rem, 3.5vw, 3.2rem); margin-bottom: 12px; }
+    .cta-wrap p { color: rgba(245,240,232,0.7); max-width: 600px; margin-bottom: 28px; font-weight: 300; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer p, footer span { font-size: 0.87rem; color: var(--muted); }
+    footer strong { color: var(--ink-3); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .hero-grid, .grid-2, .grid-3, .origins-grid { grid-template-columns: 1fr; }
+      iframe, object { height: 70vh; }
+      .cta-wrap { padding: 36px 28px; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 48px 0; }
+      .hero { padding: 48px 0 36px; }
+      nav { display: none; }
+      nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(245,240,232,0.98);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 20px;
+        gap: 4px;
+        box-shadow: var(--shadow);
+        z-index: 99;
+      }
+      nav.open a { padding: 12px; border-radius: 10px; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      header { position: relative; }
+      .hero-btns { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: 2.4rem; }
+      .cta-wrap { padding: 28px 20px; }
     }
   </style>
 </head>
-
 <body>
-  <header class="header">
-    <div class="container header__inner">
-      <div class="brand">Árvore Genealógica Ítalo-Brasileira</div>
-      <nav class="nav">
-        <a href="#pdf">PDF</a>
-        <a href="#resumo">Resumo</a>
+
+  <div class="flag-strip"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-flag" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="brand-text">
+          Cidadania Italiana
+          <small>Família Gaggiato · Martini</small>
+        </div>
+      </div>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+
+      <nav id="siteNav">
+        <a href="#origem">Origem</a>
+        <a href="#cronologia">Cronologia</a>
+        <a href="#resumo">Árvore</a>
+        <a href="#pdf">Documentos</a>
         <a href="#fontes">Fontes</a>
-        <button class="btn btn--ghost" id="themeToggle" aria-label="Alternar tema">Tema</button>
+        <a href="#pdf" class="btn-nav">Ver PDF</a>
       </nav>
     </div>
   </header>
 
   <main>
+
+    <!-- HERO -->
     <section class="hero">
-      <div class="container hero__grid">
+      <div class="container hero-grid">
         <div>
-          <p class="kicker">Origem italiana • Linha Gaggiato / Favareto e Martini / Barberato</p>
-          <h1>Árvore genealógica da família Gaggiato</h1>
-          <p class="sub">
-            Esta página organiza e exibe o PDF “Arvore Genealogica.pdf” e um resumo navegável
-            com nomes, datas, locais e registros principais.
+          <div class="eyebrow">Processo de Cidadania · Jure Sanguinis</div>
+          <h1>Família<br><em>Gaggiato</em><br>& Martini</h1>
+          <p class="hero-sub">
+            Documentação genealógica completa para o reconhecimento da cidadania italiana
+            por descendência. Núcleos Gaggiato / Favareto (Venezia) e Martini / Barberato (Treviso).
           </p>
+          <div class="hero-btns">
+            <a class="btn btn-primary" href="#pdf">📄 Ver Árvore Genealógica</a>
+            <a class="btn btn-secondary" href="Arvore%20Genealogica.pdf" download>⬇ Baixar PDF</a>
+          </div>
           <div class="chips">
-            <span class="chip">Venezia (Favaro / Campalto)</span>
-            <span class="chip">Sicília (Ribera, Agrigento)</span>
-            <span class="chip">Brasil (Mococa / SP)</span>
-            <span class="chip">Imigração (1889 / 1892)</span>
+            <span class="chip">🇮🇹 Favaro, Venezia</span>
+            <span class="chip">🇮🇹 Ribera, Agrigento</span>
+            <span class="chip">🇮🇹 Treviso, Vêneto</span>
+            <span class="chip">🇧🇷 Mococa / SP</span>
+            <span class="chip">Imigração 1889–1892</span>
           </div>
         </div>
 
-        <aside class="card">
-          <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
-            <div>
-              <div class="muted" style="font-size:12px;">Arquivo principal</div>
-              <div style="font-weight:750; margin-top:4px;">Arvore Genealogica.pdf</div>
-            </div>
-            <span class="pill" id="statusPill">verificando…</span>
-          </div>
-          <p class="muted" style="margin:12px 0 0; line-height:1.55;">
-            Se o PDF não abrir, confirme que o arquivo está na raiz do repositório com o nome
-            exatamente igual (incluindo espaço e maiúsculas/minúsculas).
+        <aside class="hero-card">
+          <div class="card-label">Documento principal</div>
+          <div class="file-name">Arvore Genealogica.pdf</div>
+          <p>
+            PDF completo com certidões, registros de imigração, batismos, óbitos
+            e a linha genealógica dos dois núcleos familiares.
           </p>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn" href="#pdf">Abrir PDF</a>
-            <a class="btn btn--ghost" id="downloadLink" href="Arvore%20Genealogica.pdf" download>Baixar</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+            <a class="btn btn-gold" href="#pdf">Visualizar PDF</a>
+            <a class="btn btn-secondary" href="Arvore%20Genealogica.pdf" download>Baixar</a>
+          </div>
+          <div class="status-badge">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">verificando…</span>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="pdf">
+    <div class="divider-ornament"><span>✦</span></div>
+
+    <!-- ORIGEM -->
+    <section id="origem" class="section">
       <div class="container">
-        <div class="section__head">
-          <h2>PDF (visualização)</h2>
-          <p>O PDF aparece embutido abaixo. Você pode também baixar no botão “Baixar”.</p>
+        <div class="section-head">
+          <div class="section-kicker">Procedência</div>
+          <h2>Origens italianas</h2>
+          <p class="section-sub">As duas famílias têm raízes no norte da Itália e imigraram ao Brasil no final do século XIX.</p>
         </div>
 
-        <div class="pdfwrap" style="margin-top:12px;">
-          <div class="pdfbar">
-            <div class="left">
-              <span class="pill">Dica: use Ctrl+F no visualizador</span>
-              <span class="pill">Se falhar, use “Baixar”</span>
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <a class="btn btn--ghost" href="Arvore%20Genealogica.pdf" target="_blank" rel="noopener">Abrir em nova aba</a>
-              <a class="btn" href="Arvore%20Genealogica.pdf" download>Baixar PDF</a>
+        <div class="origins-grid">
+          <div class="origin-card veneto">
+            <div class="origin-flag">🏛️</div>
+            <h4>Vêneto — Venezia</h4>
+            <p>Berço dos Gaggiato e Favareto. A família residia em Favaro e Campalto, comunidades da região veneziana.</p>
+            <div class="origin-meta">
+              <span class="origin-tag">Favaro Veneto</span>
+              <span class="origin-tag">Campalto</span>
+              <span class="origin-tag">Comune di Venezia</span>
             </div>
           </div>
 
-          <!-- 1) object (boa compatibilidade) -->
+          <div class="origin-card sicilia">
+            <div class="origin-flag">🌾</div>
+            <h4>Sicília — Agrigento</h4>
+            <p>Referências a Ribera, Agrigento aparecem nos documentos do núcleo Gaggiato — possível origem materna ou registros cruzados.</p>
+            <div class="origin-meta">
+              <span class="origin-tag">Ribera</span>
+              <span class="origin-tag">Agrigento</span>
+              <span class="origin-tag">Sicília</span>
+            </div>
+          </div>
+
+          <div class="origin-card brasil">
+            <div class="origin-flag">🌿</div>
+            <h4>Brasil — São Paulo</h4>
+            <p>A família se estabeleceu em Mococa e São José do Rio Pardo. O casamento de Domenico Martini foi registrado em Mococa em 1898.</p>
+            <div class="origin-meta">
+              <span class="origin-tag">Mococa / SP</span>
+              <span class="origin-tag">Fazenda Limoeiro</span>
+              <span class="origin-tag">São José do Rio Pardo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-ornament"><span>✦</span></div>
+
+    <!-- CRONOLOGIA -->
+    <section id="cronologia" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Linha do Tempo</div>
+          <h2>Cronologia familiar</h2>
+          <p class="section-sub">Datas e eventos-chave registrados nos documentos genealógicos.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="family-card">
+            <div class="family-card-header">
+              <div class="family-icon">🇮🇹</div>
+              <h3><small>Núcleo</small>Gaggiato / Favareto</h3>
+            </div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">~1865</div>
+                <div class="tl-title">Nascimento — Marco Gaggiato</div>
+                <div class="tl-desc">Filho de Pasquale Gaggiato e Angela Favareto. Data registrada: 27/08/1865. Região: Venezia.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">1889</div>
+                <div class="tl-title">Chegada ao Brasil</div>
+                <div class="tl-desc">Registro de chegada do núcleo familiar em 19/01/1889 — Museu da Imigração, SP.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">1892</div>
+                <div class="tl-title">Vittorio Gaggiato chega ao Brasil</div>
+                <div class="tl-desc">Registro de chegada em 05/07/1892. Certidão de batismo (Venezia / Campalto) presente no PDF.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">Séc. XX</div>
+                <div class="tl-title">Descendência em São Paulo</div>
+                <div class="tl-desc">Consolidação da família no estado de São Paulo. Registros de óbito e documentos civis disponíveis no PDF.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="family-card">
+            <div class="family-card-header">
+              <div class="family-icon">🏡</div>
+              <h3><small>Núcleo</small>Martini / Barberato</h3>
+            </div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">Vêneto</div>
+                <div class="tl-title">Domenico Martini & Stella Barberato</div>
+                <div class="tl-desc">Origem em Treviso (Vêneto). Emigraram para o Brasil no final do século XIX.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">1898</div>
+                <div class="tl-title">Casamento no Brasil</div>
+                <div class="tl-desc">Registro de casamento em Mococa, SP — conforme anotação no PDF genealógico.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">1911</div>
+                <div class="tl-title">Itália Martini — São José do Rio Pardo</div>
+                <div class="tl-desc">Nascimento registrado na Fazenda Limoeiro, São José do Rio Pardo, SP.</div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-year">Atual</div>
+                <div class="tl-title">Linha Odete → Walter → Requerente</div>
+                <div class="tl-desc">Vó Odete · Walter (pai) · Walter (eu) · Flávio e Fábio (irmãos).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-ornament"><span>✦</span></div>
+
+    <!-- RESUMO -->
+    <section id="resumo" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Genealogia</div>
+          <h2>Árvore genealógica</h2>
+          <p class="section-sub">Resumo navegável dos dois núcleos familiares com nomes, datas e registros principais.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="family-card">
+            <div class="family-card-header">
+              <div class="family-icon">🌳</div>
+              <h3><small>Família</small>Gaggiato · Favareto</h3>
+            </div>
+
+            <details open>
+              <summary>Marco Gaggiato — "Antenato"</summary>
+              <div class="details-body">
+                <ul>
+                  <li>Nascimento: <strong>27/08/1865</strong> — Venezia, Itália</li>
+                  <li>Pais: <strong>Pasquale Gaggiato</strong> e <strong>Angela Favareto</strong></li>
+                  <li>Chegada ao Brasil: <strong>19/01/1889</strong> (Museu da Imigração)</li>
+                  <li>Local associado: Favaro, Venezia</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>Pasquale Gaggiato & Angela Favareto</summary>
+              <div class="details-body">
+                <ul>
+                  <li>Italianos; chefes do núcleo familiar com filhos: Vittorio, Marco, Roma</li>
+                  <li>Referências a Ribera, Agrigento (Sicília) e Favaro, Venezia nos documentos</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>Irmãos: Vittorio e Roma Gaggiato</summary>
+              <div class="details-body">
+                <ul>
+                  <li><strong>Vittorio:</strong> chegada em 05/07/1892; certidão de batismo (Venezia / Campalto) no PDF</li>
+                  <li><strong>Roma:</strong> registro de chegada em 19/01/1889; imagem de óbito disponível no PDF</li>
+                </ul>
+              </div>
+            </details>
+
+            <p class="family-note">ℹ️ Resumo de navegação. O detalhamento completo, com imagens de certidões e registros, está disponível no PDF.</p>
+          </div>
+
+          <div class="family-card">
+            <div class="family-card-header">
+              <div class="family-icon">🌿</div>
+              <h3><small>Família</small>Martini · Barberato</h3>
+            </div>
+
+            <details open>
+              <summary>Domenico Martini & Stella Barberato</summary>
+              <div class="details-body">
+                <ul>
+                  <li>Origem: <strong>Treviso, Vêneto</strong></li>
+                  <li>Referências: "Bisa Itália", "Vó Odete", Fazenda Limoeiro</li>
+                  <li>Local no Brasil: São José do Rio Pardo, SP</li>
+                  <li>Casamento: <strong>Mococa, SP — 1898</strong></li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>Itália Martini — descendência</summary>
+              <div class="details-body">
+                <ul>
+                  <li>Nascimento: <strong>1911</strong> — São José do Rio Pardo, SP (Fazenda Limoeiro)</li>
+                  <li>Linha de descendência: Odete (vó) → Walter (pai) → Walter (requerente) · Flávio · Fábio</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>Locais e referências documentais</summary>
+              <div class="details-body">
+                <ul>
+                  <li><strong>Parrocchia / Campalto (Venezia):</strong> link e referência no PDF</li>
+                  <li><strong>Mapa do sobrenome "Gaggiato":</strong> referência em gens.info no PDF</li>
+                </ul>
+              </div>
+            </details>
+
+            <p class="family-note">ℹ️ Resumo de navegação. O detalhamento completo, com imagens de certidões e registros, está disponível no PDF.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-ornament"><span>✦</span></div>
+
+    <!-- PDF -->
+    <section id="pdf" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Documentação</div>
+          <h2>Árvore Genealógica — PDF</h2>
+          <p class="section-sub">O documento completo aparece embutido abaixo. Você pode também baixar ou abrir em nova aba.</p>
+        </div>
+
+        <div class="pdf-wrap">
+          <div class="pdf-bar">
+            <div class="pdf-bar-left">
+              <span class="pill">💡 Ctrl+F para buscar no visualizador</span>
+              <span class="pill">Se falhar, use "Abrir em nova aba"</span>
+            </div>
+            <div class="pdf-bar-right">
+              <a class="btn btn-secondary" href="Arvore%20Genealogica.pdf" target="_blank" rel="noopener">Abrir em nova aba ↗</a>
+              <a class="btn btn-gold" href="Arvore%20Genealogica.pdf" download>⬇ Baixar PDF</a>
+            </div>
+          </div>
           <object data="Arvore%20Genealogica.pdf" type="application/pdf">
-            <!-- 2) fallback: iframe -->
-            <iframe src="Arvore%20Genealogica.pdf" title="Árvore Genealógica (PDF)"></iframe>
+            <iframe src="Arvore%20Genealogica.pdf" title="Árvore Genealógica — Família Gaggiato e Martini"></iframe>
           </object>
         </div>
       </div>
     </section>
 
-    <section class="section" id="resumo">
+    <div class="divider-ornament"><span>✦</span></div>
+
+    <!-- FONTES -->
+    <section id="fontes" class="section">
       <div class="container">
-        <div class="section__head">
-          <h2>Resumo estruturado</h2>
-          <p>Resumo: nomes, datas, lugares e registros-chave.</p>
+        <div class="section-head">
+          <div class="section-kicker">Referências</div>
+          <h2>Fontes e registros</h2>
+          <p class="section-sub">Links e referências que aparecem no PDF para consulta e validação externa dos dados genealógicos.</p>
         </div>
 
-        <div class="grid grid--2" style="margin-top:12px;">
-          <div class="card">
-            <h3 style="margin:0 0 10px;">Núcleo Gaggiato / Favareto</h3>
+        <div class="grid-3">
+          <a class="source-card" href="https://www.parrocchiacampalto.it/" target="_blank" rel="noopener">
+            <div class="src-icon">⛪</div>
+            <div class="src-label">Paróquia — Batismo e registros</div>
+            <div class="src-title">Parrocchia di Campalto, Venezia</div>
+            <div class="src-desc">Registros paroquiais de Favaro / Campalto, onde a família Gaggiato foi batizada.</div>
+            <div class="src-link">parrocchiacampalto.it ↗</div>
+          </a>
 
-            <details open>
-              <summary>Marco Gaggiato (“Antenato”)</summary>
-              <ul class="list">
-                <li>Nascimento: ~1865 (documento indica 27/08/1865).</li>
-                <li>Pais: Pasquale Gaggiato e Angela Favareto.</li>
-                <li>Imigração ao Brasil: registro de chegada do núcleo familiar em 19/01/1889 (Museu da Imigração).</li>
-                <li>Local associado: Favaro, Venezia (menções no material).</li>
-              </ul>
-            </details>
+          <a class="source-card" href="http://www.gens.info/italia/it/turismo-viaggi-e-tradizioni-italia?cognome=gaggiato&x=28&y=16" target="_blank" rel="noopener">
+            <div class="src-icon">🗺️</div>
+            <div class="src-label">Distribuição geográfica do sobrenome</div>
+            <div class="src-title">gens.info — "Gaggiato"</div>
+            <div class="src-desc">Mapa de distribuição do sobrenome Gaggiato na Itália, confirmando concentração na região veneziana.</div>
+            <div class="src-link">gens.info ↗</div>
+          </a>
 
-            <details>
-              <summary>Pasquale Gaggiato & Angela Favareto</summary>
-              <ul class="list">
-                <li>Italianos; núcleo familiar com filhos (menção: Vittorio, Marco, Roma).</li>
-                <li>Referências a Ribera, Agrigento (Sicília) e Favaro, Venezia (no material).</li>
-              </ul>
-            </details>
-
-            <details>
-              <summary>Irmãos: Vittorio e Roma</summary>
-              <ul class="list">
-                <li>Vittorio: registro de chegada em 05/07/1892; há certidão de batismo (Venezia/Campalto) no PDF.</li>
-                <li>Roma: aparece no registro de chegada de 19/01/1889 (família) e em imagem de óbito no PDF.</li>
-              </ul>
-            </details>
-
-            <p class="muted" style="margin:12px 0 0;">
-              Observação: os dados acima são um “resumo de navegação”; o detalhamento completo está no PDF.
-            </p>
+          <div class="source-card">
+            <div class="src-icon">📋</div>
+            <div class="src-label">Arquivo público</div>
+            <div class="src-title">Museu da Imigração — Registro de chegada</div>
+            <div class="src-desc">Registros de chegada ao Brasil em 19/01/1889 e 05/07/1892, referenciados no PDF.</div>
+            <a class="src-link" href="#pdf">Ver no PDF ↓</a>
           </div>
 
-          <div class="card">
-            <h3 style="margin:0 0 10px;">Núcleo Martini / Barberato</h3>
+          <div class="source-card">
+            <div class="src-icon">📜</div>
+            <div class="src-label">Certidões</div>
+            <div class="src-title">Certidão de batismo — Vittorio Gaggiato</div>
+            <div class="src-desc">Certidão emitida pela Paróquia de Campalto, Venezia. Original escaneado disponível no PDF.</div>
+            <a class="src-link" href="#pdf">Ver no PDF ↓</a>
+          </div>
 
-            <details open>
-              <summary>Domenico Martini & Stella Barberato</summary>
-              <ul class="list">
-                <li>Referência a Treviso (Vêneto) no material.</li>
-                <li>Menções: “Bisa Itália”, “Vó Odete”, “Fazenda Limoeiro”, São José do Rio Pardo (SP).</li>
-                <li>Casamento no Brasil: Mococa, SP — 1898 (conforme anotação no PDF).</li>
-              </ul>
-            </details>
+          <div class="source-card">
+            <div class="src-icon">💒</div>
+            <div class="src-label">Registro civil — Brasil</div>
+            <div class="src-title">Casamento Martini — Mococa, 1898</div>
+            <div class="src-desc">Certidão de casamento de Domenico Martini e Stella Barberato em Mococa, SP, 1898.</div>
+            <a class="src-link" href="#pdf">Ver no PDF ↓</a>
+          </div>
 
-            <details>
-              <summary>Itália e descendência</summary>
-              <ul class="list">
-                <li>Itália: 1911 — São José do Rio Pardo, SP (Fazenda Limoeiro).</li>
-                <li>Descendentes listados: Odete (vó), Walter (pai), Walter (eu), Flávio (irmão), Fábio (irmão).</li>
-              </ul>
-            </details>
-
-            <details>
-              <summary>Locais e referências</summary>
-              <ul class="list">
-                <li>Parrocchia / Campalto (Venezia): link aparece no PDF.</li>
-                <li>Mapa de distribuição do sobrenome “Gaggiato”: referência aparece no PDF.</li>
-              </ul>
-            </details>
+          <div class="source-card">
+            <div class="src-icon">📁</div>
+            <div class="src-label">Documento principal</div>
+            <div class="src-title">Arvore Genealogica.pdf</div>
+            <div class="src-desc">Arquivo completo com todos os registros, certidões, fotos de documentos e a árvore genealógica.</div>
+            <a class="src-link" href="Arvore%20Genealogica.pdf" download>Baixar PDF ↓</a>
           </div>
         </div>
+
+        <p style="margin-top:20px; font-size:0.88rem; color:var(--muted); line-height:1.6; padding:14px 18px; border-radius:12px; background:var(--parchment); border:1px solid var(--border);">
+          📌 <strong style="color:var(--ink-3);">Nota:</strong> Os registros de imigração, óbitos, certidões e batismos estão reproduzidos no PDF principal, incluindo imagens digitalizadas dos documentos originais e capturas de tela dos sistemas de consulta.
+        </p>
       </div>
     </section>
 
-    <section class="section" id="fontes">
+    <!-- CTA -->
+    <section class="section" style="padding-top:0;">
       <div class="container">
-        <div class="section__head">
-          <h2>Fontes</h2>
-          <p>Atalhos úteis que aparecem no PDF para consulta externa.</p>
+        <div class="cta-wrap">
+          <div class="section-kicker" style="color:rgba(237,216,138,0.8); margin-bottom:16px;">
+            Cidadania Italiana · Jure Sanguinis
+          </div>
+          <h2>Documentação completa</h2>
+          <p>
+            Acesse o PDF completo com certidões, registros de imigração e a árvore genealógica
+            dos núcleos Gaggiato / Favareto e Martini / Barberato.
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="#pdf">📄 Ver Árvore Genealógica</a>
+            <a class="btn btn-secondary" href="Arvore%20Genealogica.pdf" download style="background:rgba(245,240,232,0.1); border-color:rgba(245,240,232,0.2); color:var(--cream);">⬇ Baixar PDF</a>
+          </div>
         </div>
-
-        <div class="grid" style="margin-top:12px;">
-          <a class="card" href="https://www.parrocchiacampalto.it/" target="_blank" rel="noopener">
-            <div class="muted" style="font-size:12px;">Paróquia (batismo / registros)</div>
-            <div style="font-weight:750; margin-top:6px;">parrocchiacampalto.it</div>
-          </a>
-
-          <a class="card" href="http://www.gens.info/italia/it/turismo-viaggi-e-tradizioni-italia?cognome=gaggiato&x=28&y=16" target="_blank" rel="noopener">
-            <div class="muted" style="font-size:12px;">Mapa / distribuição do sobrenome</div>
-            <div style="font-weight:750; margin-top:6px;">gens.info — “Gaggiato”</div>
-          </a>
-
-          <a class="card" href="#pdf">
-            <div class="muted" style="font-size:12px;">Documento base</div>
-            <div style="font-weight:750; margin-top:6px;">Arvore Genealogica.pdf</div>
-          </a>
-        </div>
-
-        <p class="muted" style="margin:14px 0 0; line-height:1.55;">
-          Nota: os registros (imigração, óbitos, certidões e batismos) estão reproduzidos no PDF, incluindo imagens
-          de documentos e capturas de tela.
-        </p>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <span>© <span id="year"></span> — Árvore Genealógica</span>
-      <span class="muted">Hospedado no GitHub Pages</span>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>Árvore Genealógica Ítalo-Brasileira</strong><br>
+        <span>Família Gaggiato · Martini — Venezia / Treviso → São Paulo</span>
+      </div>
+      <div style="text-align:right;">
+        <span>© <span id="year"></span> — Documentação para Cidadania Italiana</span><br>
+        <span>Hospedado no GitHub Pages</span>
+      </div>
     </div>
   </footer>
 
   <script>
-    (function(){
-      const root = document.documentElement;
-      const btn = document.getElementById("themeToggle");
-      const year = document.getElementById("year");
-      const statusPill = document.getElementById("statusPill");
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      year.textContent = String(new Date().getFullYear());
-
-      const saved = localStorage.getItem("theme");
-      if(saved === "light") root.setAttribute("data-theme","light");
-
-      btn.addEventListener("click", () => {
-        const isLight = root.getAttribute("data-theme") === "light";
-        if(isLight){
-          root.removeAttribute("data-theme");
-          localStorage.setItem("theme","dark");
-        } else {
-          root.setAttribute("data-theme","light");
-          localStorage.setItem("theme","light");
-        }
+    const menuToggle = document.getElementById('menuToggle');
+    const siteNav    = document.getElementById('siteNav');
+    menuToggle.addEventListener('click', () => {
+      const open = siteNav.classList.toggle('open');
+      menuToggle.textContent = open ? '✕' : '☰';
+    });
+    siteNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        siteNav.classList.remove('open');
+        menuToggle.textContent = '☰';
       });
+    });
 
-      // Verifica se o PDF existe (para orientar o usuário)
-      fetch("Arvore%20Genealogica.pdf", { method: "HEAD" })
-        .then(r => {
-          if(r.ok){
-            statusPill.textContent = "PDF encontrado";
-          } else {
-            statusPill.textContent = "PDF não encontrado";
-          }
-        })
-        .catch(() => statusPill.textContent = "PDF não encontrado");
-    })();
+    const statusDot  = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    fetch('Arvore%20Genealogica.pdf', { method: 'HEAD' })
+      .then(r => {
+        if (r.ok) {
+          statusDot.style.background = '#22c55e';
+          statusDot.style.animation  = 'none';
+          statusText.textContent = 'PDF encontrado ✓';
+        } else {
+          statusDot.style.background = '#ef4444';
+          statusText.textContent = 'PDF não encontrado';
+        }
+      })
+      .catch(() => {
+        statusDot.style.background = '#f59e0b';
+        statusText.textContent = 'Não foi possível verificar';
+      });
   </script>
 </body>
 </html>
